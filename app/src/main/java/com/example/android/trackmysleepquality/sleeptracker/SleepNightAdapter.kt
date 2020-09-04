@@ -41,17 +41,16 @@ class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView){
-
+    class ViewHolder private constructor(val binding: ListItemSleepNightBinding) : RecyclerView.ViewHolder(binding.root){
 
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val view = layoutInflater
-                        .inflate(R.layout.list_item_sleep_night, parent, false)
+                val binding =
+                        ListItemSleepNightBinding.inflate(layoutInflater, parent, false)
 
-                return ViewHolder(view)
+                return ViewHolder(binding)
             }
         }
     }
