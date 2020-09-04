@@ -34,23 +34,23 @@ class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+
     }
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     class ViewHolder private constructor(val binding: ListItemSleepNightBinding) : RecyclerView.ViewHolder(binding.root){
-        val sleepLength: TextView = binding.sleepLength
-        val quality: TextView = binding.qualityString
-        val qualityImage: ImageView = binding.qualityImage
+
+        fun bind(item: SleepNight) {
+            binding.sleep = item
+            binding.executePendingBindings()
+        }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding =
-                        ListItemSleepNightBinding.inflate(layoutInflater, parent, false)
+                val binding = ListItemSleepNightBinding.inflate(layoutInflater, parent, false)
 
                 return ViewHolder(binding)
             }
@@ -67,4 +67,5 @@ class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>() {
     override fun areContentsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
         return oldItem == newItem
     }
+
 }
